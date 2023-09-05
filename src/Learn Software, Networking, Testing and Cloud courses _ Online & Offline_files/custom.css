@@ -1,0 +1,369 @@
+#Top_bar{
+    top: 0!important;
+}
+.classmode {
+    color: #89e989;
+    font-size: 17px;
+}
+.footer_links {
+color: rgb(255, 255, 255)!important; outline: none!important;
+}
+.border {
+    padding: 11px;
+    margin: 0 auto 10px auto!important;
+    margin-right: 5px;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+    width: 65%;
+    font-family: "Poppins", Arial, Tahoma, sans-serif!important;
+}
+.border-color-turquoise{
+    border: 2.5px solid #62bdb4;
+    background: rgba(97, 189, 180, 0.3);
+}
+.border-color-violet{
+    border: 2.5px solid #5ead5e;
+    background: rgba(76, 175, 80, 0.1);
+}
+
+.star5 {
+    width: 30%;
+}
+
+.brhidden {
+    display:none;
+}
+.register {
+    color: #ffffff;
+    background: #0039a4;
+    font-weight: 600;
+    border: 1px solid #f1de01d1!important;
+    display: inline!important;
+    padding: 6px 10px!important;
+    background-image: linear-gradient(#f2b42d, #fd0300);
+}
+
+.contact_box {
+    background: #0373e7 url('https://scopeindia.org/images/contact.png') no-repeat 95% 95%!important;
+    background-size: 50%!important;
+    color: #fff!important;
+    background-blend-mode: luminosity;
+}
+
+.get_in_touch, .get_in_touch a, .get_in_touch h3, .get_in_touch ul, .infobox, .infobox a, .infobox h3, .infobox ul{
+color: #fff!important;
+}
+
+.get_in_touch_wrapper ul li{
+    list-style-type: none!important;
+}
+
+.call_back_form_ele {
+    font-size: 17px!important;
+    width: 100%!important;
+}
+button.call_back_form_ele{
+    font-size: 17px!important;
+    width: 100%!important;
+    font-weight: 600;
+    margin-bottom: 23px;
+}
+
+input.call_back_form_ele {
+    border: 1px solid grey!important;
+    margin-top: 10px;
+}
+
+
+#call_back_error {
+    color: red;
+}
+
+.reg_form_ul{
+    margin-left:0px!important;
+    border: 1px solid grey;
+    padding: 15px;
+}
+
+.img-fluid{
+    width: 20%!important;
+}
+
+
+.btn-primary {
+    color: #fff;
+    background-color: #7c62bd!important;
+    border-color: #5c1eff!important;
+}
+
+.btn-warning {
+    color: #fff;
+    background-color: #62bdb4!important;
+    border-color: #35e9d7!important;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #5ead5e!important;
+    border-color: #32d732!important;
+}
+@media only screen and (max-width: 1000px) {
+    .bg-cover {
+        padding-top:150px!important;
+    }
+    .border {width: 80%;}
+}
+
+.reg_form_label {
+    color:#000!important;
+    text-decoration:none!important;
+    border:0px!important;
+}
+
+.reg_form ul li {
+    list-style-type: none;
+}
+
+
+.card {
+    background-color: white !important;
+    border: none !important;
+    border-radius: 0px !important;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px !important
+}
+
+.card:hover {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px !important
+}
+
+.card>a {
+    text-decoration: none !important;
+    color: black !important
+}
+
+#blockitems {
+    margin-right: 0px !important;
+    margin-left: 0px !important
+}
+
+#icons_section {
+    width: 0%;
+    text-align: center;
+    padding: 0% !important
+}
+
+#icons_section>i {
+    font-size: 25px;
+    color: black !important
+}
+
+#heading_section {
+    width: 100%
+}
+
+#heading_section>h6 {
+    margin: 10px 0px !important;
+    color: blue !important;
+    font-family: "Poppins", Arial, Tahoma, sans-serif;
+}
+
+#heading_section>.h6list {
+    margin: 10px 0px !important;
+    color: #071546 !important
+}
+
+#heading_section h6 a {
+    color: blue !important;
+    font-family: "Poppins", Arial, Tahoma, sans-serif;
+}
+
+
+#heading_section>p {
+    font-size: 14px !important
+}
+
+.cssanimation {
+    animation-duration: 1s;
+    animation-fill-mode: both
+}
+
+.fadeInBottom {
+    animation-name: fadeInBottom
+}
+
+@keyframes fadeInBottom {
+    from {
+        opacity: 0;
+        transform: translateY(100%)
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+.cssanimation2 {
+    animation-duration: 2s;
+    animation-fill-mode: both
+}
+
+.fadeInBottom2 {
+    animation-name: fadeInBottom
+}
+
+@keyframes fadeInBottom2 {
+    from {
+        opacity: 0;
+        transform: translateY(100%)
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+.cssanimation3 {
+    animation-duration: 3s;
+    animation-fill-mode: both
+}
+
+.fadeInBottom3 {
+    animation-name: fadeInBottom
+}
+
+@keyframes fadeInBottom3 {
+    from {
+        opacity: 0;
+        transform: translateY(100%)
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    .bg-cover {
+        padding-top:100px!important;
+    }
+    .column_attr {
+
+
+    }
+    h3 {
+        font-size: 22px;
+        line-height: 40px;
+        font-weight: 800;
+        letter-spacing: 0px;
+    }
+
+    .col-md-2{
+        margin: 5px;
+    }
+
+    .reg_form_ul{
+        margin-top: 13px!important;
+        margin-bottom: 0px!important;
+    }
+
+    .img-fluid{
+    width: 50%!important;
+    }
+    .brhidden {
+        display:block;
+    }
+    .star5 {
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+
+    .offers{
+        margin: 20px 0px;
+    }
+
+    .classmode {
+        font-size: 15px;
+    }
+    #heading_section>h6 {
+        margin: 0px 0px !important;
+        font-size:  18px!important;
+        padding: 10px 3px !important;
+        color: blue;
+    }
+
+    #heading_section>.h6list {
+        margin: 0px 0px !important;
+        color: #071546 !important
+    }
+
+    .course-details {
+        margin-bottom: -20px!important;
+        border-bottom: 1px solid #DDD;
+    }
+
+    h2 {
+        font-size: 23px;
+        line-height: 30px;
+        font-weight: 800;
+        letter-spacing: 0px;
+    }
+
+    #Top_bar{
+        position: fixed!important;
+    }
+
+    .dark h1 {
+        margin-top: 130px!important;
+    }
+
+    .border {
+    padding: 10px;
+    margin-top: 30px!important;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 30px;
+    width: 100%;
+    font-family: "Poppins", Arial, Tahoma, sans-serif!important;
+    }
+    .brhidden {
+        display:block;
+    }
+
+    .bg-cover {
+        padding-top:0px!important;
+    }
+    .star5 {
+        width: 50%;
+    }
+}
+
+
+@media only screen and (max-width: 490px) {
+    h3 {
+        font-size: 21px;
+        line-height: 40px;
+        font-weight: 800;
+        letter-spacing: 0px;
+        margin: 0px;
+    }
+    .star5 {
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 370px) {
+    h3 {
+        font-size: 21px;
+        line-height: 40px;
+        font-weight: 800;
+        letter-spacing: 0px;
+        margin: 0px;
+    }
+    .star5 {
+        width: 50%;
+    }
+}
+

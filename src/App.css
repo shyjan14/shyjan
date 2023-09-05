@@ -1,0 +1,91 @@
+#nav{
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 50px;
+  position: sticky;
+  top: 10px;
+ 
+
+}
+header{
+  
+  background-color: #071e67;;
+  margin-top: -16px;
+  position: sticky;
+  top: 0px;
+  
+}
+#reg{
+  height: 30px;
+  background-image:linear-gradient(#f2b42d, #fd0300);
+}
+a:hover{
+  
+  color: yellow;
+ 
+}
+
+a{
+  color: white;
+  text-decoration:none;
+}
+section{
+  margin-top: -16px;
+  
+}
+#background{
+  background-image: url('https://scopeindia.org/images/slider_bg.jpg');
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+#scopelogo{
+  width: 40%;
+}
+#form-section{
+  background-color: rgb(33, 23, 216);
+}
+form{
+  background-color: aliceblue;
+  width: 80%;
+  margin: auto;
+  border: 1px solid;
+  
+}
+#form-div{
+  display: flex;
+  text-align: center;
+  width: 80%;
+  margin: auto;
+  
+  align-items: center;
+  justify-content: space-around;
+  height: 600px;
+}
+.field-divison{
+  border: 1px solid;
+  height: 500px;
+  width:50%;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-content: space-evenly;
+}
+
+.decor{
+  text-align: left;
+}
+input{
+  height: 30px;
+}
+#form-reg{
+  /* /* font-size: 50px; */
+  text-align: center;
+  background-color:rgb(33, 23, 216);
+  height: 150px; 
+  margin-top: -22px;
+}
