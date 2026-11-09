@@ -107,7 +107,7 @@ export class EmployeesService {
     const user = await this.prisma.user.create({
       data: {
         employeeCode: dto.employeeCode.toUpperCase(), email: dto.email.toLowerCase(), phone: dto.phone,
-        role: dto.role ?? 'EMPLOYEE', passwordHash: await bcrypt.hash(password, 12), mustChangePwd: true,
+        role: dto.role ?? 'EMPLOYEE', passwordHash: await bcrypt.hash(password, 10), mustChangePwd: true,
         employee: { create: this.toData(dto) },
       },
       include: { employee: true },
@@ -143,7 +143,7 @@ export class EmployeesService {
     if (!e) throw new NotFoundException();
     if (e.user.role === 'SUPER_ADMIN' && u.role !== 'SUPER_ADMIN') throw new ForbiddenException();
     const password = tempPassword();
-    await this.prisma.user.update({ where: { id: e.userId }, data: { passwordHash: await bcrypt.hash(password, 12), mustChangePwd: true, failedLogins: 0, lockedUntil: null } });
+    await this.prisma.user.update({ where: { id: e.userId }, data: { passwordHash: await bcrypt.hash(password, 10), mustChangePwd: true, failedLogins: 0, lockedUntil: null } });
     await this.prisma.refreshToken.updateMany({ where: { userId: e.userId, revokedAt: null }, data: { revokedAt: new Date() } });
     await this.audit.log({ actorId: u.userId, action: 'PASSWORD_RESET', entity: 'User', entityId: e.userId, req });
     return { temporaryPassword: password };

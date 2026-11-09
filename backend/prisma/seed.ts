@@ -31,7 +31,7 @@ const NATIONALITIES = ['Emirati', 'Indian', 'Pakistani', 'Filipino', 'Egyptian',
 
 async function main() {
   const demoPw = process.env.SEED_PASSWORD ?? 'Welcome@2026';
-  const hash = await bcrypt.hash(demoPw, 12);
+  const hash = await bcrypt.hash(demoPw, 10);
 
   const general = await prisma.shift.upsert({
     where: { name: 'General 9-6' }, update: {},

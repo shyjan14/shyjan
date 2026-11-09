@@ -4,7 +4,7 @@ import { AuthUser, CurrentUser, MANAGERS, Public, Roles } from '../common/decora
 import { ChangePasswordDto, LoginDto, MfaCodeDto, MfaVerifyDto, RefreshDto } from './auth.dto';
 import { AuthService } from './auth.service';
 
-const LOGIN_LIMIT = Number(process.env.LOGIN_RATE_LIMIT_PER_MIN ?? 10);
+const LOGIN_LIMIT = Number(process.env.LOGIN_RATE_LIMIT_PER_MIN ?? 60);
 
 @Controller('auth')
 export class AuthController {

@@ -23,7 +23,7 @@ import { ReportsController } from './reports/reports.controller';
 @Module({
   imports: [
     JwtModule.register({}),
-    ThrottlerModule.forRoot([{ ttl: 60_000, limit: Number(process.env.RATE_LIMIT_PER_MIN ?? 120) }]),
+    ThrottlerModule.forRoot([{ ttl: 60_000, limit: Number(process.env.RATE_LIMIT_PER_MIN ?? 600) }]),
     ...(process.env.DISABLE_JOBS === 'true' ? [] : [ScheduleModule.forRoot()]),
   ],
   controllers: [HealthController, AuthController, AttendanceController, LeaveController, EmployeesController, SetupController, ReportsController],

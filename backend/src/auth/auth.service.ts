@@ -10,7 +10,7 @@ import { ChangePasswordDto, LoginDto } from './auth.dto';
 
 const MAX_FAILED = 5;
 const LOCK_MINUTES = 15;
-const DUMMY_HASH = bcrypt.hashSync('timing-equaliser', 12);
+const DUMMY_HASH = bcrypt.hashSync('timing-equaliser', 10);
 const sha256 = (s: string) => createHash('sha256').update(s).digest('hex');
 type Req = { ip?: string; headers?: Record<string, unknown> };
 
@@ -143,7 +143,7 @@ export class AuthService {
     const user = await this.prisma.user.findUniqueOrThrow({ where: { id: userId } });
     if (!(await bcrypt.compare(dto.currentPassword, user.passwordHash))) throw new BadRequestException('Current password is incorrect');
     if (dto.currentPassword === dto.newPassword) throw new BadRequestException('New password must be different');
-    await this.prisma.user.update({ where: { id: userId }, data: { passwordHash: await bcrypt.hash(dto.newPassword, 12), mustChangePwd: false } });
+    await this.prisma.user.update({ where: { id: userId }, data: { passwordHash: await bcrypt.hash(dto.newPassword, 10), mustChangePwd: false } });
     // Log out every other session.
     await this.prisma.refreshToken.updateMany({ where: { userId, revokedAt: null }, data: { revokedAt: new Date() } });
     await this.audit.log({ actorId: userId, action: 'PASSWORD_CHANGED', entity: 'User', entityId: userId, req });

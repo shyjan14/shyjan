@@ -50,7 +50,7 @@ async function main() {
       await prisma.user.create({
         data: {
           employeeCode: username, email, role: 'SUPER_ADMIN',
-          passwordHash: await bcrypt.hash(password, 12),
+          passwordHash: await bcrypt.hash(password, 10),
           mustChangePwd: true,
           employee: {
             create: {

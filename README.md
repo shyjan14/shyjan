@@ -57,7 +57,7 @@ More screenshots are in `docs/screenshots/`. The full specification is in [`docs
 > ⚠️ Confirm these figures, and the Islamic holiday dates, with your HR or legal advisor every year.
 
 ### Security
-- Passwords hashed with bcrypt (cost 12). The account locks for 15 minutes after 5 failed logins. Login is rate-limited.
+- Passwords hashed with bcrypt (cost 10). The account locks for 15 minutes after 5 failed logins. Login is rate-limited.
 - Short-lived access tokens (15 min) with **rotating refresh tokens**. If a stolen refresh token is reused, every session of that user is signed out.
 - **MFA (TOTP)** for HR and managers
 - **Role-based access**: Employee / Branch Manager / HR Admin / Super Admin. A **branch manager can only see their own branch**, and this is enforced on the server for every request.
@@ -139,7 +139,7 @@ flutter build ipa --release
 ```
 
 ### Live server
-Follow **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)**. It sets up Docker, automatic HTTPS (Caddy) and backups for `hr.newtontraininguae.com` and `api.newtontraininguae.com`.
+Follow **[docs/DEPLOYMENT-AWS.md](docs/DEPLOYMENT-AWS.md)** (AWS + RDS database, recommended) or **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)** (single server). It sets up Docker, automatic HTTPS (Caddy) and backups for `hr.newtontraininguae.com` and `api.newtontraininguae.com`.
 
 ### Tests
 ```bash
