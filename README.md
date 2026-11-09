@@ -1,4 +1,4 @@
-# Attendance & HR System (UAE)
+# Newton Training Center: Attendance & HR System (UAE)
 
 This is a complete attendance and HR system for a company with **8 branches and about 100 employees** in the UAE.
 
@@ -92,6 +92,29 @@ Demo logins (password `Welcome@2026`; change these before real use):
 | Branch Manager (Dubai Mall) | `manager.mall@example.com` |
 | Employee (Dubai Mall) | `employee@example.com` |
 
+### Live setup (real data, no demo users)
+Run this on an empty database instead of `db:seed`:
+```bash
+cd backend
+npx prisma migrate deploy
+ADMIN_PASSWORD='your-first-password' npm run setup:prod
+```
+On the Docker server, use:
+```bash
+docker compose exec -e ADMIN_PASSWORD='your-first-password' api node dist/setup/setup-production.js
+```
+This creates:
+- the **`admin`** login (Super Admin)
+- the UAE leave policy and 2026 holidays
+- departments, a default shift and a **Head Office** branch
+
+The password is never stored in the code. You must change it at first login, and running the script again never overwrites it.
+
+After that, in the portal:
+1. Set the Head Office GPS location.
+2. Add your other branches.
+3. Add your employees.
+
 ### 2. HR portal
 ```bash
 cd admin-portal
@@ -119,7 +142,7 @@ flutter build ipa --release --dart-define=API_URL=https://hr-api.yourcompany.ae
 ```bash
 cp .env.example .env   # fill in DB_PASSWORD and both JWT secrets
 docker compose up -d --build
-docker compose exec api npx ts-node prisma/seed.ts   # optional demo data
+docker compose exec -e ADMIN_PASSWORD='...' api node dist/setup/setup-production.js
 ```
 
 ### Tests

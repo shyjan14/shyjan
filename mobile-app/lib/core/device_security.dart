@@ -7,6 +7,8 @@ import 'package:local_auth/local_auth.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 import 'package:uuid/uuid.dart';
 
+import 'config.dart';
+
 class DeviceInfo {
   DeviceInfo(this.id, this.model, this.platform);
   final String id;
@@ -105,7 +107,7 @@ class DeviceSecurity {
     if (kIsWeb) return true;
     try {
       if (!await _auth.isDeviceSupported()) return true;
-      return await _auth.authenticate(localizedReason: 'Unlock Attendance & HR', persistAcrossBackgrounding: true);
+      return await _auth.authenticate(localizedReason: 'Unlock ${AppConfig.appName}', persistAcrossBackgrounding: true);
     } catch (_) {
       return false;
     }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../core/config.dart';
 import '../core/session.dart';
 import '../core/theme.dart';
 
@@ -70,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      _mfaToken == null ? 'Sign in with your employee code or email.' : 'Enter the 6-digit code from your authenticator app.',
+                      _mfaToken == null ? '${AppConfig.appName}\nSign in with your employee code or email.' : 'Enter the 6-digit code from your authenticator app.',
                       style: const TextStyle(color: AppColors.muted, fontSize: 15),
                     ),
                     const SizedBox(height: 28),

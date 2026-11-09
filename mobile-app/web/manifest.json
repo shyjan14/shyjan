@@ -1,6 +1,6 @@
 {
-    "name": "hrms_app",
-    "short_name": "hrms_app",
+    "name": "Newton Training Center HR",
+    "short_name": "Newton HR",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

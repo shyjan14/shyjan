@@ -2,6 +2,7 @@
 import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { api, setSession } from '@/lib/api';
+import { COMPANY, COMPANY_SHORT } from '@/lib/brand';
 import { Button, ErrorBox, Field, Input } from '@/components/ui';
 
 export default function LoginPage() {
@@ -41,8 +42,8 @@ export default function LoginPage() {
         <div className="absolute -bottom-32 right-0 h-[28rem] w-[28rem] rounded-full bg-brand-900/50" />
         <div className="relative flex h-full flex-col justify-between p-12 text-white">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/15 font-bold">HR</div>
-            <span className="text-lg font-semibold">Attendance & HR</span>
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/15 text-sm font-bold">{COMPANY_SHORT}</div>
+            <span className="text-lg font-semibold">{COMPANY}</span>
           </div>
           <div>
             <h2 className="max-w-md text-4xl font-semibold leading-tight">Every branch, every shift, in one place.</h2>
@@ -54,14 +55,14 @@ export default function LoginPage() {
       <div className="flex items-center justify-center px-4 py-12">
         <form onSubmit={submit} className="w-full max-w-sm space-y-5">
           <div>
-            <h1 className="text-2xl font-semibold text-slate-900">{mfaToken ? 'Two-step verification' : 'Sign in'}</h1>
-            <p className="mt-1 text-sm text-slate-500">{mfaToken ? 'Enter the 6-digit code from your authenticator app.' : 'HR and managers sign in with employee code or email.'}</p>
+            <h1 className="text-2xl font-semibold text-slate-900">{mfaToken ? 'Two-step verification' : `Sign in to ${COMPANY}`}</h1>
+            <p className="mt-1 text-sm text-slate-500">{mfaToken ? 'Enter the 6-digit code from your authenticator app.' : 'HR and managers sign in with username / employee code or email.'}</p>
           </div>
           <ErrorBox error={error} />
           {!mfaToken ? (
             <>
-              <Field label="Employee code or email">
-                <Input autoFocus autoComplete="username" value={login} onChange={(e) => setLogin(e.target.value)} required placeholder="EMP001 or name@company.ae" />
+              <Field label="Username, employee code or email">
+                <Input autoFocus autoComplete="username" value={login} onChange={(e) => setLogin(e.target.value)} required placeholder="admin, EMP001 or name@company.ae" />
               </Field>
               <Field label="Password">
                 <Input type="password" autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} required />
