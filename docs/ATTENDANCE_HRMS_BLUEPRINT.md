@@ -1,7 +1,7 @@
 # Attendance & Employee Portal: Project Blueprint
 
 **Scope:** Mobile attendance app plus web HR portal for a UAE company with **8 branches and about 100 employees**.
-**Status:** Phase 0, planning and specification. Read and approve this before development starts.
+**Status:** Phases 1–5 built (see README for what is done and what is next).
 
 > ⚠️ The UAE Labour Law figures below (leave days, gratuity, working hours) come from Federal Decree-Law No. 33 of 2021 and its Executive Regulations. Ask your HR or legal advisor to confirm them before go-live. Every rule is a **configurable setting** in the system, not a hard-coded value.
 
