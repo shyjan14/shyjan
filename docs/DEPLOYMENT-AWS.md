@@ -7,7 +7,7 @@ Staff phones / HR browser
         │ HTTPS (hr. / api.newtontraininguae.com)
         ▼
 ┌───────────────────────────┐   private network   ┌──────────────────────────────┐
-│ EC2 server  (t3.medium)   │ ──────────────────► │ RDS PostgreSQL 16            │
+│ EC2 server  (t3.medium)   │ ──────────────────► │ RDS PostgreSQL 16 (t4g.small)│
 │ Caddy HTTPS + API + Portal│   SSL, port 5432     │ automatic daily backups      │
 │ + uploaded selfies/docs   │                      │ point-in-time restore        │
 └───────────────────────────┘                      └──────────────────────────────┘
@@ -32,10 +32,10 @@ A t3.medium has 2 vCPUs, about half of the test machine. Daily check-ins will st
 | Item | Size | Approx. USD / month |
 |---|---|---|
 | EC2 server | t3.medium (2 vCPU, 4 GB), 40 GB gp3 disk | 35–45 |
-| RDS PostgreSQL | db.t3.small or db.t4g.small, 50 GB gp3, Single-AZ | 35–50 |
+| RDS PostgreSQL | **db.t4g.small**, 20 GB gp3, Single-AZ (chosen) | 30–40 |
 | Public IP (Elastic IP) | 1 | ~4 |
 | Data transfer, snapshots | | 5–10 |
-| **Total** | | **≈ USD 80–110 (≈ AED 300–400)** |
+| **Total** | | **≈ USD 80–100 (≈ AED 300–370)** |
 | Optional: RDS **Multi-AZ** (standby DB copy, automatic failover) | | + 35–50 |
 
 One-time / yearly costs:
@@ -57,9 +57,9 @@ RDS → *Create database*:
 - Template: **Production** (or *Dev/Test* to save cost)
 - DB instance identifier: `newton-hr-db`
 - Master username: `hrms`. Master password: a strong password; write it down safely.
-- Instance: **db.t3.small** or **db.t4g.small**
-- Storage: gp3, **50 GB**, enable storage autoscaling (max 200 GB)
-- Availability: Single-AZ (cheaper) or **Multi-AZ** (safest)
+- Instance: **db.t4g.small** (Burstable classes). If it isn't offered in the region, choose **db.t3.small**.
+- Storage: gp3, **20 GB**, enable storage autoscaling (max 100 GB). 20 GB holds many years of attendance for 100 staff.
+- Availability: **Single-AZ DB instance** (chosen). You can switch to Multi-AZ later without losing data.
 - Connectivity: **Public access = No**, default VPC
 - Security group: create new, named `newton-hr-db-sg`
 - Additional configuration:
