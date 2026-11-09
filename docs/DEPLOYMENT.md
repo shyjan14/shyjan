@@ -13,7 +13,42 @@ Total time: about 1–2 hours.
 
 ---
 
-## Step 1: Create a cloud server (about 15 min)
+---
+
+## Using Hostinger (domain and server in one account)
+
+Your domain `newtontraininguae.com` is at Hostinger. The simplest path is a **Hostinger VPS**.
+
+> The normal Hostinger **Web Hosting** (shared) plan **cannot** run this system. It needs a **VPS**. Your existing website stays on its current plan and is not affected.
+
+**A. Buy the VPS** (hPanel → **VPS** → Buy)
+- Plan: **KVM 2** (2 vCPU, 8 GB RAM) is enough for 100 staff. Check the current price on Hostinger.
+- Location: choose the nearest data centre offered. Hostinger has no UAE location; if company policy requires data inside the UAE, use Azure "UAE North" (Steps 1 onwards) instead.
+- Operating system: **Ubuntu 24.04 with Docker** (application template). If it isn't listed, choose plain **Ubuntu 24.04**.
+- Set a strong **root password** and write down the **VPS IP address**.
+- VPS → **Firewall**: allow ports **22, 80, 443** (or leave the firewall off).
+
+**B. DNS records** (hPanel → **Domains** → `newtontraininguae.com` → **DNS / Nameservers** → **DNS records**)
+- Add an **A** record: Name `hr`, Points to `VPS IP`, TTL default.
+- Add an **A** record: Name `api`, Points to `VPS IP`, TTL default.
+- **Do not** change the nameservers or the existing `@` / `www` records, because those keep your website working.
+
+**C. Open the server terminal**
+In hPanel → VPS → **Browser terminal**, or from your PC:
+```bash
+ssh root@VPS_IP
+```
+If you chose plain Ubuntu (no Docker template), install Docker first:
+```bash
+curl -fsSL https://get.docker.com | sh
+```
+
+**D. Continue with [Step 4](#step-4-get-the-code-5-min) above** (get the code), then Steps 5–9.
+As root, run the commands without `sudo`.
+
+---
+
+## Step 1: Create a cloud server, Azure / AWS (about 15 min)
 
 Any Ubuntu server works. Recommended: **Microsoft Azure, region "UAE North"** (keeps data in the UAE).
 **AWS, region "Middle East (UAE) me-central-1"** works the same way.
