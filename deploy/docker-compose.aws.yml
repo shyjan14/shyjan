@@ -1,0 +1,54 @@
+# AWS deployment: database on Amazon RDS for PostgreSQL (managed, automatic backups).
+# This server runs only Caddy (HTTPS) + API + HR portal.
+#
+#   docker compose -f deploy/docker-compose.aws.yml --env-file .env up -d --build
+#
+# .env must contain DATABASE_URL pointing to RDS, e.g.
+#   DATABASE_URL=postgresql://hrms:PASSWORD@xxxx.me-central-1.rds.amazonaws.com:5432/hrms?schema=public&sslmode=require
+services:
+  api:
+    build: ../backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: ${DATABASE_URL:?set DATABASE_URL to the RDS endpoint}
+      JWT_ACCESS_SECRET: ${JWT_ACCESS_SECRET:?set JWT_ACCESS_SECRET}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET:?set JWT_REFRESH_SECRET}
+      CORS_ORIGINS: https://${PORTAL_DOMAIN}
+      UPLOAD_DIR: /app/uploads
+      COMPANY_NAME: ${COMPANY_NAME:-Newton Training Center}
+      LOGIN_RATE_LIMIT_PER_MIN: ${LOGIN_RATE_LIMIT_PER_MIN:-60}
+      RATE_LIMIT_PER_MIN: ${RATE_LIMIT_PER_MIN:-600}
+    volumes: [uploads:/app/uploads]
+    logging: { driver: json-file, options: { max-size: "20m", max-file: "5" } }
+
+  portal:
+    build:
+      context: ../admin-portal
+      args:
+        NEXT_PUBLIC_API_URL: https://${API_DOMAIN}
+        NEXT_PUBLIC_COMPANY_NAME: ${COMPANY_NAME:-Newton Training Center}
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_API_URL: https://${API_DOMAIN}
+    depends_on: [api]
+    logging: { driver: json-file, options: { max-size: "20m", max-file: "5" } }
+
+  caddy:
+    image: caddy:2.8.4-alpine
+    restart: unless-stopped
+    ports: ["80:80", "443:443"]
+    environment:
+      PORTAL_DOMAIN: ${PORTAL_DOMAIN:?set PORTAL_DOMAIN}
+      API_DOMAIN: ${API_DOMAIN:?set API_DOMAIN}
+      ACME_EMAIL: ${ACME_EMAIL:?set ACME_EMAIL}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on: [portal, api]
+
+volumes:
+  uploads:
+  caddy_data:
+  caddy_config:
