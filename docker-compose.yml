@@ -1,5 +1,8 @@
-# Local / single-server deployment. For production put the API and portal behind HTTPS
-# (e.g. Caddy or an AWS/Azure load balancer in the UAE region) and use strong secrets.
+# Newton Training Center HR: single-server deployment.
+#   cp .env.example .env   # fill in secrets
+#   docker compose up -d --build
+# Only Caddy (ports 80/443) is exposed to the internet. The database, API and portal
+# are reachable only inside the Docker network.
 services:
   db:
     image: postgres:16-alpine
@@ -19,22 +22,42 @@ services:
     restart: unless-stopped
     depends_on: { db: { condition: service_healthy } }
     environment:
+      NODE_ENV: production
       DATABASE_URL: postgresql://hrms:${DB_PASSWORD}@db:5432/hrms?schema=public
       JWT_ACCESS_SECRET: ${JWT_ACCESS_SECRET:?set JWT_ACCESS_SECRET}
       JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET:?set JWT_REFRESH_SECRET}
-      CORS_ORIGINS: ${PORTAL_URL:-http://localhost:3000}
+      CORS_ORIGINS: https://${PORTAL_DOMAIN}
       UPLOAD_DIR: /app/uploads
+      COMPANY_NAME: ${COMPANY_NAME:-Newton Training Center}
     volumes: [uploads:/app/uploads]
-    ports: ["4000:4000"]
 
   portal:
     build:
       context: ./admin-portal
-      args: { NEXT_PUBLIC_API_URL: "${API_PUBLIC_URL:-http://localhost:4000}" }
+      args:
+        NEXT_PUBLIC_API_URL: https://${API_DOMAIN}
+        NEXT_PUBLIC_COMPANY_NAME: ${COMPANY_NAME:-Newton Training Center}
     restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_API_URL: https://${API_DOMAIN}
     depends_on: [api]
-    ports: ["3000:3000"]
+
+  caddy:
+    image: caddy:2.8.4-alpine
+    restart: unless-stopped
+    ports: ["80:80", "443:443"]
+    environment:
+      PORTAL_DOMAIN: ${PORTAL_DOMAIN:?set PORTAL_DOMAIN}
+      API_DOMAIN: ${API_DOMAIN:?set API_DOMAIN}
+      ACME_EMAIL: ${ACME_EMAIL:?set ACME_EMAIL}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on: [portal, api]
 
 volumes:
   dbdata:
   uploads:
+  caddy_data:
+  caddy_config:

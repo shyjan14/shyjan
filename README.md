@@ -130,20 +130,16 @@ cd mobile-app
 flutter pub get
 flutter run --dart-define=API_URL=http://10.0.2.2:4000      # Android emulator
 ```
-For a real phone, use your server's HTTPS address:
+Release builds connect to `https://api.newtontraininguae.com` by default:
 ```bash
-flutter build apk --release --dart-define=API_URL=https://hr-api.yourcompany.ae
+flutter build apk --release
 ```
 ```bash
-flutter build ipa --release --dart-define=API_URL=https://hr-api.yourcompany.ae
+flutter build ipa --release
 ```
 
-### Docker (single server)
-```bash
-cp .env.example .env   # fill in DB_PASSWORD and both JWT secrets
-docker compose up -d --build
-docker compose exec -e ADMIN_PASSWORD='...' api node dist/setup/setup-production.js
-```
+### Live server
+Follow **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)**. It sets up Docker, automatic HTTPS (Caddy) and backups for `hr.newtontraininguae.com` and `api.newtontraininguae.com`.
 
 ### Tests
 ```bash

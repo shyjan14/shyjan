@@ -1,0 +1,26 @@
+# HTTPS reverse proxy. Caddy gets free Let's Encrypt certificates automatically
+# once the DNS records point to this server.
+{
+	email {$ACME_EMAIL}
+}
+
+{$PORTAL_DOMAIN} {
+	encode gzip
+	reverse_proxy portal:3000
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		-Server
+	}
+}
+
+{$API_DOMAIN} {
+	encode gzip
+	request_body {
+		max_size 8MB
+	}
+	reverse_proxy api:4000
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		-Server
+	}
+}
